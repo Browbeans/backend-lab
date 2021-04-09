@@ -1,0 +1,9 @@
+body {
+    background: lightblue;
+}
+
+.box {
+    background: gray;
+    margin: 1rem;
+    cursor: pointer;
+}

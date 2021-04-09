@@ -1,0 +1,32 @@
+GET http://localhost:3000/
+
+###
+GET http://localhost:3000/api/product
+
+###
+POST http://localhost:3000/api/product
+Content-Type: application/json
+
+{
+    "name": "Dugges Tropic Thunder", 
+    "price": 43,
+    "description": "Mycket fruktig och syrlig smak med inslag av mango, passionsfrukt, persika och apelsin.", 
+    "id": 7
+}
+
+
+###
+
+PUT http://localhost:3000/api/product/1
+Content-Type: application/json
+
+{
+    "name": "Dugges Amarillo", 
+    "price": 25,
+    "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal.",
+    "id": 6
+}
+
+### 
+
+DELETE http://localhost:3000/api/product/4
