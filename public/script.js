@@ -76,7 +76,7 @@ function createInputsForChange(beerItem, btnText) {
     ) 
   } else {
     submitButton.addEventListener('click', 
-    () => requestAddBeer(bodyTitle, description, price)
+      () => requestAddBeer(bodyTitle, description, price)
     )
   }
     
@@ -90,7 +90,7 @@ async function requestChangeBeer(title, description, price, id) {
     description: description
 }
   const change = await makeRequest("/api/product/" + id, "PUT", body)
-  console.log(change)
+  location.reload()
 }
 
 async function requestAddBeer(title, description, price) {
@@ -101,7 +101,7 @@ async function requestAddBeer(title, description, price) {
     description: description
 }
   const change = await makeRequest("/api/product/", "POST", body)
-  console.log(change)
+  location.reload()
 }
 
 async function requestSpecificBeer() {
