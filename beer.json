@@ -1,20 +1,20 @@
 [
   {
-    "name": "Dugges Amarillo",
+    "name": "",
     "price": 25,
-    "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal.",
+    "description": "",
     "id": 1
   },
   {
-    "name": "Dugges New School",
-    "price": 75,
-    "description": "Nyanserad, rostad, söt smak med inslag av fat, mörk choklad, rostad kokos, kanel, kaffe och soja.",
+    "name": "Dugges Amarillo",
+    "price": 25,
+    "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal.",
     "id": 2
   },
   {
-    "name": "Dugges Citra",
+    "name": "Dugges Amarillo",
     "price": 25,
-    "description": "Humlearomatisk smak med liten sötma, med inslag av ananas, gula krusbär, sockerkaka och lime.",
+    "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal.",
     "id": 3
   },
   {
