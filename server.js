@@ -29,12 +29,12 @@ app.post('/api/product', (req, res) => {
     const data = JSON.stringify(beer, null, 2)
     fs.writeFile("beer.json", data, (err) => {
         if(err) throw err;
-        res.json(beer)
+        res.status(201).json(beer)
     })
 })
 
 app.get('/api/product', (req, res) => {
-    res.json(beer)
+    res.status(200).json(beer)
 })
 
 app.get('/api/product/:id', (req, res) => {
@@ -44,7 +44,7 @@ app.get('/api/product/:id', (req, res) => {
     if(specificBeer === undefined){
         res.json({'Error': "Couldnt find that id"})
     }
-    res.json(specificBeer)
+    res.status(200).json(specificBeer)
 })
 
 app.delete('/api/product/:id', (req, res) => {
@@ -54,7 +54,7 @@ app.delete('/api/product/:id', (req, res) => {
     const data = JSON.stringify(beer, null, 2)
     fs.writeFile("beer.json", data, (err) => {
         if(err) throw err;
-        res.json(beer)
+        res.status(200).json(beer)
     })
 })
 
@@ -69,7 +69,7 @@ app.put('/api/product/:id', (req, res) => {
     const data = JSON.stringify(beer, null, 2)
     fs.writeFile("beer.json", data,(err) => {
         if(err) throw err
-        res.json('You changed the beer')
+        res.json(null)
     })
 })
 

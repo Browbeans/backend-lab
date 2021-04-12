@@ -1,20 +1,14 @@
 [
   {
-    "name": "",
-    "price": 25,
-    "description": "",
-    "id": 1
-  },
-  {
-    "name": "Dugges Amarillo",
-    "price": 25,
-    "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal.",
+    "name": "Dugges New School",
+    "price": 75,
+    "description": "Nyanserad, rostad, söt smak med inslag av fat, mörk choklad, rostad kokos, kanel, kaffe och soja.",
     "id": 2
   },
   {
-    "name": "Dugges Amarillo",
+    "name": "Dugges Citra",
     "price": 25,
-    "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal.",
+    "description": "Humlearomatisk smak med liten sötma, med inslag av ananas, gula krusbär, sockerkaka och lime.",
     "id": 3
   },
   {
@@ -24,9 +18,15 @@
     "id": 4
   },
   {
-    "name": "Dugges Cherry",
-    "price": 32,
-    "description": "Bärig, syrlig smak med tydlig karaktär av körsbär, inslag av mandelmassa och citrus.",
+    "name": "Dugges Tropic Thunder",
+    "price": 43,
+    "description": "Mycket fruktig och syrlig smak med inslag av mango, passionsfrukt, persika och apelsin.",
     "id": 5
+  },
+  {
+    "name": "dasda",
+    "price": "123",
+    "description": "sdasda",
+    "id": 6
   }
 ]

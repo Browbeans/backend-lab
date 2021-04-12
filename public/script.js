@@ -2,42 +2,105 @@ window.addEventListener("load", addEventListeners);
 
 const getAllButton = document.getElementById('getAll')
 const getSpecific = document.getElementById('getSpecific')
+const addBeer = document.getElementById('addBeer')
 
 async function addEventListeners() {
   getAllButton.addEventListener('click', showProduct)
   getSpecific.addEventListener('click', requestSpecificBeer)
+  addBeer.addEventListener('click', () => createInputsForChange( '', 'Lägg till'))
 }
 
 
-function createInputsForChange(id) {
+function createInputsForChange(beerItem, btnText) {
   const container = document.getElementById('container')
   container.innerHTML = ''
   const div = document.createElement("div");
   container.append(div)
   div.classList.add("box");
 
+  const titleLabel = document.createElement('label')
+  const descriptionLabel = document.createElement('label')
+  const priceLabel = document.createElement('label')
   const titleInput = document.createElement('input')
   const descriptionInput = document.createElement('input')
+  const priceInput = document.createElement('input')
+  const submitButton = document.createElement('button')
+  titleLabel.innerHTML = 'Ölnamn...'
+  descriptionLabel.innerHTML = 'Beskrivning...'
+  priceLabel.innerHTML = 'Pris...'
+
+
+  titleInput.required = true
+  descriptionInput.required = true
+  priceInput.required = true
+
+  priceInput.type = 'number'
+  div.append(titleLabel)
   div.append(titleInput)
+  div.append(descriptionLabel)
   div.append(descriptionInput)
-  let bodyTitle = ''
-  let description = ''
+  div.append(priceLabel)
+  div.append(priceInput)
+  div.append(submitButton)
+  submitButton.innerHTML = btnText
+  submitButton.value = 'submit'
+  let bodyTitle = beerItem.name
+  let description = beerItem.description
+  let price = beerItem.price
+  if(btnText === 'Bekräfta') {
+    titleInput.value = beerItem.name
+    descriptionInput.value = beerItem.description
+    priceInput.value = beerItem.price
+  } else {
+    titleInput.value = ''
+    descriptionInput.value = ''
+    priceInput.value = ''
+  }
+  
   titleInput.onchange = () => {
     bodyTitle = titleInput.value
+  }
+
+  descriptionInput.onchange = () => {
     description = descriptionInput.value
   }
 
-  requestChangeBeer(bodyTitle, description, id)
+  priceInput.onchange = () => {
+    price = priceInput.value
+  }
+
+  if(btnText === 'Bekräfta') {
+    submitButton.addEventListener(
+      'click', 
+      () => requestChangeBeer(bodyTitle, description, price, beerItem.id)
+    ) 
+  } else {
+    submitButton.addEventListener('click', 
+    () => requestAddBeer(bodyTitle, description, price)
+    )
+  }
+    
 }
 
-async function requestChangeBeer(title, description, id) {
+async function requestChangeBeer(title, description, price, id) {
   
  const body = {
     name: title, 
-    price: 25,
+    price: price,
     description: description
 }
   const change = await makeRequest("/api/product/" + id, "PUT", body)
+  console.log(change)
+}
+
+async function requestAddBeer(title, description, price) {
+  
+ const body = {
+    name: title, 
+    price: price,
+    description: description
+}
+  const change = await makeRequest("/api/product/", "POST", body)
   console.log(change)
 }
 
@@ -72,7 +135,7 @@ async function showProduct() {
     div.appendChild(buttonDiv)
     buttonDiv.appendChild(editButton);
     buttonDiv.appendChild(deleteButton);
-    editButton.addEventListener('click', () => createInputsForChange(productItem.id)) 
+    editButton.addEventListener('click', () => createInputsForChange(productItem, 'Bekräfta')) 
     deleteButton.onclick = async function removeProduct() {
         fetch("/api/product/" + productItem.id, {
           method: "DELETE",
