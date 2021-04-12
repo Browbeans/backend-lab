@@ -4,6 +4,11 @@ GET http://localhost:3000/
 GET http://localhost:3000/api/product
 
 ###
+
+GET http://localhost:3000/api/product/2
+
+###
+
 POST http://localhost:3000/api/product
 Content-Type: application/json
 
@@ -22,8 +27,7 @@ Content-Type: application/json
 {
     "name": "Dugges Amarillo", 
     "price": 25,
-    "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal.",
-    "id": 6
+    "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal."
 }
 
 ### 

@@ -1,8 +1,8 @@
 const express = require('express')
+const fs = require('fs')
+
 const app = express()
 const port = 3000 
-
-const fs = require('fs')
 const data = fs.readFileSync("beer.json")
 let beer = JSON.parse(data)
 
@@ -29,13 +29,22 @@ app.post('/api/product', (req, res) => {
     const data = JSON.stringify(beer, null, 2)
     fs.writeFile("beer.json", data, (err) => {
         if(err) throw err;
-
         res.json(beer)
     })
 })
 
 app.get('/api/product', (req, res) => {
     res.json(beer)
+})
+
+app.get('/api/product/:id', (req, res) => {
+    const urlID = req.params.id
+    const index = beer.findIndex(b => b.id === parseInt(urlID))
+    let specificBeer = beer[index]
+    if(specificBeer === undefined){
+        res.json({'Error': "Couldnt find that id"})
+    }
+    res.json(specificBeer)
 })
 
 app.delete('/api/product/:id', (req, res) => {

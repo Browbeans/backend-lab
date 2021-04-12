@@ -1,8 +1,8 @@
 [
   {
-    "name": "Dugges The South",
-    "price": 35,
-    "description": "Fruktig smak med tydlig beska och liten sötma, inslag av apelsinmarmelad, persika, tallbarr, honung, passionsfrukt och grapefrukt.",
+    "name": "Dugges Amarillo",
+    "price": 25,
+    "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal.",
     "id": 1
   },
   {
@@ -28,11 +28,5 @@
     "price": 32,
     "description": "Bärig, syrlig smak med tydlig karaktär av körsbär, inslag av mandelmassa och citrus.",
     "id": 5
-  },
-  {
-    "name": "Dugges Tropic Thunder",
-    "price": 43,
-    "description": "Mycket fruktig och syrlig smak med inslag av mango, passionsfrukt, persika och apelsin.",
-    "id": 6
   }
 ]
