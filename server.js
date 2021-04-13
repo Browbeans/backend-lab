@@ -42,7 +42,7 @@ app.get('/api/product/:id', (req, res) => {
     const index = beer.findIndex(b => b.id === parseInt(urlID))
     let specificBeer = beer[index]
     if(specificBeer === undefined){
-        res.json({'Error': "Beer with that ID doesnt exist"})
+        res.status(404).json({'Error': "Beer with that ID doesnt exist"})
     }
     res.status(200).json(specificBeer)
 })

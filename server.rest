@@ -18,10 +18,9 @@ Content-Type: application/json
     "description": "Mycket fruktig och syrlig smak med inslag av mango, passionsfrukt, persika och apelsin."
 }
 
-
 ###
 
-PUT http://localhost:3000/api/product/1
+PUT http://localhost:3000/api/product/2
 Content-Type: application/json
 
 {
