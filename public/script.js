@@ -78,7 +78,7 @@ function createInputsForChange(beerItem, btnText) {
         if(price !== undefined || bodyTitle !== undefined || description !== undefined) {
           requestAddBeer(bodyTitle, description, price) 
         }else {
-          alert('please')
+          alert('please type in all fields')
         } 
         }
     )
