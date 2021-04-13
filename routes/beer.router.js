@@ -1,6 +1,7 @@
 import express from 'express'
 import fs from 'fs'
 import bodyParser from 'body-parser'
+import ResponseError from '../responseError.js'
 
 
 const router = express.Router()
@@ -39,7 +40,7 @@ router.get('/:id', (req, res) => {
     const index = beer.findIndex(b => b.id === parseInt(urlID))
     let specificBeer = beer[index]
     if(specificBeer === undefined){
-        res.status(404).json({'Error': "Beer with that ID doesnt exist"})
+        res.status(404).json(`There is no beer with ${urlID} as id`)
     }
     res.status(200).json(specificBeer)
 })
@@ -70,7 +71,7 @@ router.put('/:id', (req, res) => {
     const data = JSON.stringify(beer, null, 2)
     fs.writeFile("beer.json", data,(err) => {
         if(index === -1) {
-            res.status(404).json('Cant find the ID of the product you want to change')
+            res.status(404).json(`Cant find ${urlID} as an id`)
         }
         res.status(200).json(changedBeer)
     })

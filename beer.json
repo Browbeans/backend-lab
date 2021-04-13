@@ -28,5 +28,9 @@
     "price": 43,
     "description": "Mycket fruktig och syrlig smak med inslag av mango, passionsfrukt, persika och apelsin.",
     "id": 9
+  },
+  {
+    "name": "dasd",
+    "id": 10
   }
 ]
