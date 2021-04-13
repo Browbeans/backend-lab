@@ -1,12 +1,10 @@
 window.addEventListener("load", addEventListeners);
 
 const getAllButton = document.getElementById('getAll')
-const getSpecific = document.getElementById('getSpecific')
 const addBeer = document.getElementById('addBeer')
 
 async function addEventListeners() {
   getAllButton.addEventListener('click', showProduct)
-  getSpecific.addEventListener('click', requestSpecificBeer)
   addBeer.addEventListener('click', () => createInputsForChange( '', 'Lägg till'))
 }
 
@@ -76,7 +74,13 @@ function createInputsForChange(beerItem, btnText) {
     ) 
   } else {
     submitButton.addEventListener('click', 
-      () => requestAddBeer(bodyTitle, description, price)
+      () => {
+        if(price !== undefined || bodyTitle !== undefined || description !== undefined) {
+          requestAddBeer(bodyTitle, description, price) 
+        }else {
+          alert('please')
+        } 
+        }
     )
   }
     
@@ -90,7 +94,42 @@ async function requestChangeBeer(title, description, price, id) {
     description: description
 }
   const change = await makeRequest("/api/product/" + id, "PUT", body)
-  location.reload()
+  showSpecificOrChanged(body, id)
+}
+
+async function showSpecificOrChanged(body, id) {
+  const container = document.getElementById('container')
+  container.innerHTML = ''
+  const div = document.createElement('div')
+  container.append(div)
+  div.classList.add("box");
+  const buttonDiv = document.createElement('div')
+  const h3 = document.createElement('h3')
+  const pricePara = document.createElement('p')
+  const aboutPara = document.createElement('p')
+  const deleteButton = document.createElement('button')
+  const editButton = document.createElement('button')
+
+  h3.innerHTML = body.name;
+  aboutPara.innerHTML = body.description;
+  pricePara.innerHTML = body.price + ' kr';
+  deleteButton.innerHTML = 'Ta bort bärsen'
+  editButton.innerHTML = 'Ändra bärsen'
+
+  div.appendChild(h3);
+  div.appendChild(aboutPara);
+  div.appendChild(pricePara);
+  div.appendChild(buttonDiv)
+  buttonDiv.appendChild(editButton);
+  buttonDiv.appendChild(deleteButton);
+  editButton.addEventListener('click', () => createInputsForChange(productItem, 'Bekräfta')) 
+  deleteButton.onclick = async function removeProduct() {
+      fetch("/api/product/" + id, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((res) => console.log(res))
+    }
 }
 
 async function requestAddBeer(title, description, price) {
@@ -101,12 +140,13 @@ async function requestAddBeer(title, description, price) {
     description: description
 }
   const change = await makeRequest("/api/product/", "POST", body)
-  location.reload()
+  showProduct()
 }
 
-async function requestSpecificBeer() {
-  const change = await makeRequest("/api/product/1", "GET", body)
-  console.log(change)
+async function requestSpecificBeer(id) {
+  const specificBeer = await makeRequest("/api/product/" + id, "GET")
+  console.log(specificBeer)
+  showSpecificOrChanged(specificBeer, id)
 }
 
 async function showProduct() {
@@ -122,11 +162,13 @@ async function showProduct() {
     const aboutPara = document.createElement('p')
     const deleteButton = document.createElement('button')
     const editButton = document.createElement('button')
+    const specificButton = document.createElement('button')
     h3.innerHTML = productItem.name;
     aboutPara.innerHTML = productItem.description;
-    pricePara.innerHTML = productItem.price;
+    pricePara.innerHTML = productItem.price + ' kr';
     deleteButton.innerHTML = 'Ta bort bärsen'
     editButton.innerHTML = 'Ändra bärsen'
+    specificButton.innerHTML = 'Hämta denna Öl'
     container.append(div)
     div.classList.add("box");
     div.appendChild(h3);
@@ -135,13 +177,15 @@ async function showProduct() {
     div.appendChild(buttonDiv)
     buttonDiv.appendChild(editButton);
     buttonDiv.appendChild(deleteButton);
+    buttonDiv.appendChild(specificButton);
+    specificButton.addEventListener('click', ()  => requestSpecificBeer(productItem.id))
     editButton.addEventListener('click', () => createInputsForChange(productItem, 'Bekräfta')) 
     deleteButton.onclick = async function removeProduct() {
         fetch("/api/product/" + productItem.id, {
           method: "DELETE",
         })
-          .then((res) => res.text()) // or res.json()
-          .then((res) => console.log(res));
+          .then((res) => res.json())
+          .then(showProduct);
       }
   });
 }

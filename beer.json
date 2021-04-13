@@ -1,6 +1,6 @@
 [
   {
-    "name": "dsadasd",
+    "name": "Dugges New School",
     "price": 75,
     "description": "Nyanserad, rostad, söt smak med inslag av fat, mörk choklad, rostad kokos, kanel, kaffe och soja.",
     "id": 2
@@ -18,15 +18,15 @@
     "id": 4
   },
   {
-    "name": "Dugges Tropic Thunder",
-    "price": 43,
-    "description": "Mycket fruktig och syrlig smak med inslag av mango, passionsfrukt, persika och apelsin.",
+    "name": "Dugges Cherry",
+    "price": 32,
+    "description": "Bärig, syrlig smak med tydlig karaktär av körsbär, inslag av mandelmassa och citrus.",
     "id": 5
   },
   {
-    "name": "dsad",
-    "price": "123",
-    "description": "dasd",
+    "name": "Dugges Organic KELLERBIER",
+    "price": "129",
+    "description": "GRÖN GREJS SOM SERVERAS VAAARMT ÅÅ",
     "id": 6
   }
 ]

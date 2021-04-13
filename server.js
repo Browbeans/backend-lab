@@ -42,7 +42,7 @@ app.get('/api/product/:id', (req, res) => {
     const index = beer.findIndex(b => b.id === parseInt(urlID))
     let specificBeer = beer[index]
     if(specificBeer === undefined){
-        res.json({'Error': "Couldnt find that id"})
+        res.json({'Error': "Beer with that ID doesnt exist"})
     }
     res.status(200).json(specificBeer)
 })
@@ -50,11 +50,10 @@ app.get('/api/product/:id', (req, res) => {
 app.delete('/api/product/:id', (req, res) => {
     const urlID = req.params.id
     beer = beer.filter((specificBeer) => specificBeer.id !== parseInt(urlID));
-    
     const data = JSON.stringify(beer, null, 2)
     fs.writeFile("beer.json", data, (err) => {
         if(err) throw err;
-        res.status(200).json(beer)
+        res.status(200).json(null)
     })
 })
 
@@ -62,14 +61,21 @@ app.put('/api/product/:id', (req, res) => {
 
     const urlID = req.params.id
     const index = beer.findIndex(b => b.id === parseInt(urlID))
-    let specificBeer = beer[index]
-    specificBeer.name = req.body.name
-    specificBeer.price = req.body.price
-    specificBeer.description = req.body.description
+    if(index !== -1) {
+        let specificBeer = beer[index]
+        specificBeer.name = req.body.name
+        specificBeer.price = req.body.price
+        specificBeer.description = req.body.description
+    }
+    const changedBeer = {
+        specificBeer: beer[index]
+    }
     const data = JSON.stringify(beer, null, 2)
     fs.writeFile("beer.json", data,(err) => {
-        if(err) throw err
-        res.json(null)
+        if(index === -1) {
+            res.status(404).json('Cant find the ID of the product you want to change')
+        }
+        res.status(200).json(changedBeer)
     })
 })
 
