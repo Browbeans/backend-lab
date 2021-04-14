@@ -10,7 +10,7 @@ async function addEventListeners() {
   searchButton.addEventListener('click', createSearchBar)
 }
 
-async function createSearchBar(error, message) {
+async function createSearchBar(isError, message) {
   const container = document.getElementById('container')
   container.innerHTML = ''
   const div = document.createElement('div')
@@ -24,7 +24,7 @@ async function createSearchBar(error, message) {
   searchSubmit.innerHTML = 'Sök'
   searchInput.type = 'number'
   div.append(infoH2)
-  if(error === true) {
+  if(isError === true) {
     const para = document.createElement('p')
     para.innerHTML = message
     div.append(para)
