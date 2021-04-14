@@ -1,11 +1,8 @@
 import express from 'express'
 import fs from 'fs'
-import bodyParser from 'body-parser'
 import ResponseError from '../responseError.js'
 
-
 const router = express.Router()
-router.use(bodyParser.json())
 const data = fs.readFileSync('./beer.json')
 let beer = JSON.parse(data)
 

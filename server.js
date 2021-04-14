@@ -4,7 +4,7 @@ import beerRouter from './routes/beer.router.js'
 const app = express()
 const port = 3000 
 
-
+app.use(express.json())
 app.use('/api/product', beerRouter)
 app.use(express.static('./public'))
 
