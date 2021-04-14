@@ -2,12 +2,55 @@ window.addEventListener("load", addEventListeners);
 
 const getAllButton = document.getElementById('getAll')
 const addBeer = document.getElementById('addBeer')
+const searchButton = document.getElementById('searchBtn')
 
 async function addEventListeners() {
   getAllButton.addEventListener('click', showProduct)
   addBeer.addEventListener('click', () => createInputsForChange( '', 'Lägg till'))
+  searchButton.addEventListener('click', createSearchBar)
 }
 
+async function createSearchBar(error) {
+  const container = document.getElementById('container')
+  container.innerHTML = ''
+  const div = document.createElement('div')
+  container.append(div)
+  div.classList.add('box')
+  
+  const infoH2 = document.createElement('h2')
+  const searchInput = document.createElement('input')
+  const searchSubmit = document.createElement('button')
+  infoH2.innerHTML = 'Sök vänligen efter id som är en siffra 1 eller 2 osv...'
+  searchSubmit.innerHTML = 'Sök'
+  searchInput.type = 'number'
+  div.append(infoH2)
+  if(error === true) {
+    const para = document.createElement('p')
+    para.innerHTML = 'Det finns tyvärr ingel bärs med de ID du angav...'
+    div.append(para)
+  }
+  div.append(searchInput)
+  div.append(searchSubmit)
+
+  let searchValue = ''
+
+  searchInput.addEventListener('change', () => {
+    searchValue = searchInput.value
+  })
+  searchSubmit.addEventListener('click', () => {
+    handleSearch(searchValue)
+  })
+}
+
+async function handleSearch(id) {
+  const change = await makeRequest(`/api/product/${id}`, "GET")
+  console.log(change.name)
+  if(change.name !== undefined) {
+    showSpecificOrChanged(change, id)
+  } else {
+    createSearchBar(true)
+  }
+}
 
 function createInputsForChange(beerItem, btnText) {
   const container = document.getElementById('container')
@@ -122,7 +165,7 @@ async function showSpecificOrChanged(body, id) {
   div.appendChild(buttonDiv)
   buttonDiv.appendChild(editButton);
   buttonDiv.appendChild(deleteButton);
-  editButton.addEventListener('click', () => createInputsForChange(productItem, 'Bekräfta')) 
+  editButton.addEventListener('click', () => createInputsForChange(body, 'Bekräfta')) 
   deleteButton.onclick = async function removeProduct() {
       fetch("/api/product/" + id, {
         method: "DELETE",
