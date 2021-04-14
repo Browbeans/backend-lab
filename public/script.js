@@ -10,7 +10,7 @@ async function addEventListeners() {
   searchButton.addEventListener('click', createSearchBar)
 }
 
-async function createSearchBar(error) {
+async function createSearchBar(error, message) {
   const container = document.getElementById('container')
   container.innerHTML = ''
   const div = document.createElement('div')
@@ -26,7 +26,7 @@ async function createSearchBar(error) {
   div.append(infoH2)
   if(error === true) {
     const para = document.createElement('p')
-    para.innerHTML = 'Det finns tyvärr ingel bärs med de ID du angav...'
+    para.innerHTML = message
     div.append(para)
   }
   div.append(searchInput)
@@ -44,11 +44,10 @@ async function createSearchBar(error) {
 
 async function handleSearch(id) {
   const change = await makeRequest(`/api/product/${id}`, "GET")
-  console.log(change.name)
   if(change.name !== undefined) {
     showSpecificOrChanged(change, id)
   } else {
-    createSearchBar(true)
+    createSearchBar(true, change)
   }
 }
 
