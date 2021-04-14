@@ -5,7 +5,7 @@ GET http://localhost:3000/api/product
 
 ###
 
-GET http://localhost:3000/api/product/2
+GET http://localhost:3000/api/product/10
 
 ###
 
@@ -20,7 +20,8 @@ Content-Type: application/json
 
 ###
 
-PUT http://localhost:3000/api/product/2
+
+PUT http://localhost:3000/api/product/10
 Content-Type: application/json
 
 {
@@ -28,6 +29,7 @@ Content-Type: application/json
     "price": 25,
     "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal."
 }
+
 
 ### 
 
