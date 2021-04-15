@@ -1,6 +1,7 @@
 # Dugges CRUD - API
 ### [Github Repo] (https://github.com/Browbeans/backend-lab)
 
+Krav uppfyllda G och VG
 
 Detta projekt innehåller ett API samt ett webgränssnitt så det lätt går att modifera API:et (CRUD). 
 Det finns olika anrop man kan göra: 
