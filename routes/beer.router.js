@@ -1,6 +1,5 @@
 import express from 'express'
 import fs from 'fs'
-import ResponseError from '../responseError.js'
 
 const router = express.Router()
 const data = fs.readFileSync('./beer.json')
