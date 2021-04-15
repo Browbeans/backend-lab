@@ -27,7 +27,8 @@ Content-Type: application/json
 {
     "name": "Dugges Amarillo", 
     "price": 25,
-    "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal."
+    "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal.", 
+    "image": "https://dugges.se/wp-content/uploads/2021/02/bottle_web3_Amarillo-1000x1978.jpg"
 }
 
 

@@ -199,13 +199,9 @@ async function requestAddBeer(title, description, price, image) {
     description: description,
     image: image
 }
-  if(title === undefined) {
+  if(!title || !description || !image || !price) {
     createInputsForChange('', 'Lägg till', true)
-  }else if (description === undefined) {
-    createInputsForChange('', 'Lägg till', true)
-  }else if(price === undefined) {
-    createInputsForChange('', 'Lägg till', true)
-  }else {
+  } else {
     const change = await makeRequest("/api/product/", "POST", body)
     showProduct()
   }

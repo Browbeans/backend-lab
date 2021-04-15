@@ -7,6 +7,9 @@ const data = fs.readFileSync('./beer.json')
 let beer = JSON.parse(data)
 
 router.post('/', (req, res) => {
+    if(!req.body.name || !req.body.price || !req.body.description || !req.body.image) {
+        return res.status(400).json('Data missing')
+    }
     let idToSave = 0
     beer.forEach((todo) => {
         if(todo.id > idToSave) {
