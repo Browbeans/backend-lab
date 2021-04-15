@@ -5,7 +5,7 @@ GET http://localhost:3000/api/product
 
 ###
 
-GET http://localhost:3000/api/product/10
+GET http://localhost:3000/api/product/4
 
 ###
 
@@ -15,13 +15,14 @@ Content-Type: application/json
 {
     "name": "Dugges Tropic Thunder", 
     "price": 43,
-    "description": "Mycket fruktig och syrlig smak med inslag av mango, passionsfrukt, persika och apelsin."
+    "description": "Mycket fruktig och syrlig smak med inslag av mango, passionsfrukt, persika och apelsin.",
+    "image": "https://dugges.se/wp-content/uploads/2015/07/bottle_web3_TropicThunder-2-1000x1978.jpg"
 }
 
 ###
 
 
-PUT http://localhost:3000/api/product/10
+PUT http://localhost:3000/api/product/1
 Content-Type: application/json
 
 {
