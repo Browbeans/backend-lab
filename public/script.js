@@ -51,7 +51,7 @@ async function handleSearch(id) {
   }
 }
 
-function createInputsForChange(beerItem, btnText) {
+function createInputsForChange(beerItem, btnText, isError) {
   const container = document.getElementById('container')
   container.innerHTML = ''
   const div = document.createElement("div");
@@ -61,13 +61,16 @@ function createInputsForChange(beerItem, btnText) {
   const titleLabel = document.createElement('label')
   const descriptionLabel = document.createElement('label')
   const priceLabel = document.createElement('label')
+  const imageLabel = document.createElement('label')
   const titleInput = document.createElement('input')
   const descriptionInput = document.createElement('input')
   const priceInput = document.createElement('input')
+  const imageInput = document.createElement('input')
   const submitButton = document.createElement('button')
   titleLabel.innerHTML = 'Ölnamn...'
   descriptionLabel.innerHTML = 'Beskrivning...'
   priceLabel.innerHTML = 'Pris...'
+  imageLabel.innerHTML = 'Bild (länkformat)...'
 
 
   titleInput.required = true
@@ -81,20 +84,30 @@ function createInputsForChange(beerItem, btnText) {
   div.append(descriptionInput)
   div.append(priceLabel)
   div.append(priceInput)
+  div.append(imageLabel)
+  div.append(imageInput)
+  if(isError === true) {
+    const p = document.createElement('p')
+    p.innerHTML = 'Vänligen fyll i alla fält'
+    div.append(p)
+  }
   div.append(submitButton)
   submitButton.innerHTML = btnText
   submitButton.value = 'submit'
   let bodyTitle = beerItem.name
   let description = beerItem.description
   let price = beerItem.price
+  let image = beerItem.image
   if(btnText === 'Bekräfta') {
     titleInput.value = beerItem.name
     descriptionInput.value = beerItem.description
     priceInput.value = beerItem.price
+    imageInput.value = beerItem.image
   } else {
     titleInput.value = ''
     descriptionInput.value = ''
     priceInput.value = ''
+    imageInput.value = ''
   }
   
   titleInput.onchange = () => {
@@ -109,31 +122,32 @@ function createInputsForChange(beerItem, btnText) {
     price = priceInput.value
   }
 
+  imageInput.onchange = () => {
+    image = imageInput.value
+  }
+
   if(btnText === 'Bekräfta') {
     submitButton.addEventListener(
       'click', 
-      () => requestChangeBeer(bodyTitle, description, price, beerItem.id)
+      () => requestChangeBeer(bodyTitle, description, price, image,beerItem.id)
     ) 
   } else {
     submitButton.addEventListener('click', 
       () => {
-        if(price !== undefined || bodyTitle !== undefined || description !== undefined) {
-          requestAddBeer(bodyTitle, description, price) 
-        }else {
-          alert('please type in all fields')
-        } 
+        requestAddBeer(bodyTitle, description, price, image)  
         }
     )
   }
     
 }
 
-async function requestChangeBeer(title, description, price, id) {
+async function requestChangeBeer(title, description, price, image, id) {
   
  const body = {
     name: title, 
     price: price,
-    description: description
+    description: description,
+    image: image
 }
   const change = await makeRequest("/api/product/" + id, "PUT", body)
   showSpecificOrChanged(body, id)
@@ -149,18 +163,21 @@ async function showSpecificOrChanged(body, id) {
   const h3 = document.createElement('h3')
   const pricePara = document.createElement('p')
   const aboutPara = document.createElement('p')
+  const idPara = document.createElement('p')
   const deleteButton = document.createElement('button')
   const editButton = document.createElement('button')
 
   h3.innerHTML = body.name;
   aboutPara.innerHTML = body.description;
   pricePara.innerHTML = body.price + ' kr';
+  idPara.innerHTML = 'ID: ' + body.id
   deleteButton.innerHTML = 'Ta bort bärsen'
   editButton.innerHTML = 'Ändra bärsen'
 
   div.appendChild(h3);
   div.appendChild(aboutPara);
   div.appendChild(pricePara);
+  div.appendChild(idPara)
   div.appendChild(buttonDiv)
   buttonDiv.appendChild(editButton);
   buttonDiv.appendChild(deleteButton);
@@ -174,15 +191,24 @@ async function showSpecificOrChanged(body, id) {
     }
 }
 
-async function requestAddBeer(title, description, price) {
+async function requestAddBeer(title, description, price, image) {
   
  const body = {
     name: title, 
     price: price,
-    description: description
+    description: description,
+    image: image
 }
-  const change = await makeRequest("/api/product/", "POST", body)
-  showProduct()
+  if(title === undefined) {
+    createInputsForChange('', 'Lägg till', true)
+  }else if (description === undefined) {
+    createInputsForChange('', 'Lägg till', true)
+  }else if(price === undefined) {
+    createInputsForChange('', 'Lägg till', true)
+  }else {
+    const change = await makeRequest("/api/product/", "POST", body)
+    showProduct()
+  }
 }
 
 async function requestSpecificBeer(id) {
@@ -200,22 +226,29 @@ async function showProduct() {
     const div = document.createElement("div");
     const buttonDiv = document.createElement('div')
     const h3 = document.createElement('h3')
-    const pricePara = document.createElement('p')
-    const aboutPara = document.createElement('p')
+    // const pricePara = document.createElement('p')
+    // const aboutPara = document.createElement('p')
+    const image = document.createElement('img')
     const deleteButton = document.createElement('button')
     const editButton = document.createElement('button')
     const specificButton = document.createElement('button')
+    const contentDiv = document.createElement('div')
     h3.innerHTML = productItem.name;
-    aboutPara.innerHTML = productItem.description;
-    pricePara.innerHTML = productItem.price + ' kr';
+    // aboutPara.innerHTML = productItem.description;
+    // pricePara.innerHTML = productItem.price + ' kr';
+    image.src = productItem.image
     deleteButton.innerHTML = 'Ta bort bärsen'
     editButton.innerHTML = 'Ändra bärsen'
     specificButton.innerHTML = 'Hämta denna Öl'
     container.append(div)
+    div.appendChild(contentDiv)
     div.classList.add("box");
-    div.appendChild(h3);
-    div.appendChild(aboutPara);
-    div.appendChild(pricePara);
+    contentDiv.classList.add('contentDiv')
+    contentDiv.appendChild(image)
+    contentDiv.appendChild(h3);
+    image.classList.add('beerImage')
+    // div.appendChild(aboutPara);
+    // div.appendChild(pricePara);
     div.appendChild(buttonDiv)
     buttonDiv.appendChild(editButton);
     buttonDiv.appendChild(deleteButton);

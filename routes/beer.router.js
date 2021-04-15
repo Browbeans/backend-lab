@@ -18,6 +18,7 @@ router.post('/', (req, res) => {
         name: req.body.name,
         price: req.body.price, 
         description: req.body.description, 
+        image: req.body.image,
         id: idToSave
     }
     beer.push(newBeer)
@@ -61,6 +62,7 @@ router.put('/:id', (req, res) => {
         specificBeer.name = req.body.name
         specificBeer.price = req.body.price
         specificBeer.description = req.body.description
+        specificBeer.image = req.body.image
     }
     const changedBeer = {
         specificBeer: beer[index]
