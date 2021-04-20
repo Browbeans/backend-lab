@@ -69,3 +69,27 @@ GET http://localhost:3000/api/user/allUsers
 ###
 
 DELETE http://localhost:3000/api/user/logout
+
+###
+
+// Post commands 
+
+###
+
+POST http://localhost:3000/api/posts/addPost
+Content-Type: application/json
+
+{
+    "title": "First post", 
+    "body": "this is a test and lets see what happens"
+}
+
+###
+
+PATCH  http://localhost:3000/api/posts/editPost/607ecce1f720a333c8fbd653
+Content-Type: application/json
+
+{
+    "title": "Changed title on post", 
+    "body": "changed body on post"
+}

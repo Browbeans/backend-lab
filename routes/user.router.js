@@ -8,13 +8,15 @@ const { restart } = require('nodemon')
 const userRouter = express.Router()
 mongoose.connect('mongodb://localhost:27017/excercise', { useNewUrlParser: true})
 
-userRouter.use(cookieSession({
+const session = userRouter.use(cookieSession({
     name: 'session', 
     secret: '5aAf4CUv', 
     secure: false, 
     maxAge: 1000 * 60,
     httpOnly: true
 }))
+
+module.exports = session
 
 userRouter.post('/register', async(req, res) => {
     const { userName, passWord, role } = req.body
