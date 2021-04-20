@@ -46,6 +46,7 @@ postRouter.patch('/editPost/:id', async (req, res) => {
     if(currentPost.author !== req.session.username) {
         return res.status(401).json('You didnt create post therefor u cant change it')
     }
+
     const updatePost = {
         title: req.body.title, 
         body: req.body.body

@@ -90,11 +90,11 @@ Content-Type: application/json
 
 ###
 
-PATCH  http://localhost:3000/api/posts/editPost/607ecce1f720a333c8fbd653
+PATCH  http://localhost:3000/api/posts/editPost/607ed7dbb98f0d47e036ef33
 Content-Type: application/json
 
 {
-    "title": "Changed title on post", 
+    "title": "Changed", 
     "body": "changed body on post"
 }
 
