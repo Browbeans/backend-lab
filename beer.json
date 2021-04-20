@@ -1,9 +1,9 @@
 [
   {
-    "name": "Dugges The South",
-    "price": 35,
-    "description": "Fruktig smak med tydlig beska och liten sötma, inslag av apelsinmarmelad, persika, tallbarr, honung, passionsfrukt och grapefrukt.",
-    "image": "https://dugges.se/wp-content/uploads/2021/01/bottle_web3_TheSouth-1000x1978.jpg",
+    "name": "Dugges Amarillo",
+    "price": 25,
+    "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal.",
+    "image": "https://dugges.se/wp-content/uploads/2021/02/bottle_web3_Amarillo-1000x1978.jpg",
     "id": 1
   },
   {
@@ -33,5 +33,78 @@
     "description": "Bärig, syrlig smak med tydlig karaktär av körsbär, inslag av mandelmassa och citrus.",
     "image": "https://dugges.se/wp-content/uploads/2020/08/bottle_web2_Cherry-1000x1978.jpg",
     "id": 5
+  },
+  {
+    "_id": "607e87311ec2c224a045223b",
+    "name": "Dugges Tropic Thunder",
+    "price": 43,
+    "description": "Mycket fruktig och syrlig smak med inslag av mango, passionsfrukt, persika och apelsin.",
+    "image": "https://dugges.se/wp-content/uploads/2015/07/bottle_web3_TropicThunder-2-1000x1978.jpg",
+    "id": 6
+  },
+  {
+    "_id": "607e881e0dc1181e48cc502c",
+    "name": "Dugges Tropic Thunder",
+    "price": 43,
+    "description": "Mycket fruktig och syrlig smak med inslag av mango, passionsfrukt, persika och apelsin.",
+    "image": "https://dugges.se/wp-content/uploads/2015/07/bottle_web3_TropicThunder-2-1000x1978.jpg",
+    "id": 7
+  },
+  {
+    "_id": "607e881f3f6d7a31b433399d",
+    "name": "Dugges Tropic Thunder",
+    "price": 43,
+    "description": "Mycket fruktig och syrlig smak med inslag av mango, passionsfrukt, persika och apelsin.",
+    "image": "https://dugges.se/wp-content/uploads/2015/07/bottle_web3_TropicThunder-2-1000x1978.jpg",
+    "id": 8,
+    "__v": 0
+  },
+  {
+    "_id": "607e881f3f6d7a31b433399e",
+    "name": "Dugges Tropic Thunder",
+    "price": 43,
+    "description": "Mycket fruktig och syrlig smak med inslag av mango, passionsfrukt, persika och apelsin.",
+    "image": "https://dugges.se/wp-content/uploads/2015/07/bottle_web3_TropicThunder-2-1000x1978.jpg",
+    "id": 9
+  },
+  {
+    "_id": "607e891f0e75d64b24aaa835",
+    "name": "Dugges Tropic Thunder",
+    "price": 43,
+    "description": "Mycket fruktig och syrlig smak med inslag av mango, passionsfrukt, persika och apelsin.",
+    "image": "https://dugges.se/wp-content/uploads/2015/07/bottle_web3_TropicThunder-2-1000x1978.jpg",
+    "id": 10
+  },
+  {
+    "_id": "607e89ce1ad0490878d760be",
+    "name": "Dugges Amarillo",
+    "price": 25,
+    "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal.",
+    "image": "https://dugges.se/wp-content/uploads/2021/02/bottle_web3_Amarillo-1000x1978.jpg",
+    "id": 11
+  },
+  {
+    "_id": "607e89d81db8ea3354144bc4",
+    "name": "Dugges New School",
+    "price": 75,
+    "description": "Nyanserad, rostad, söt smak med inslag av fat, mörk choklad, rostad kokos, kanel, kaffe och soja.",
+    "image": "https://dugges.se/wp-content/uploads/2021/01/bottle_web3_NewSchool-1000x1978.jpg",
+    "id": 12
+  },
+  {
+    "_id": "607e89e862c7582990ffb96b",
+    "name": "Dugges Bubble Gummy",
+    "price": 35,
+    "description": "Fruktig smak med tydlig beska, inslag av ananas, nektarin, rosmarin, honung, mango och apelsin.",
+    "image": "https://dugges.se/wp-content/uploads/2020/02/bottle_web2_BubbleGummy-1000x1978.jpg",
+    "id": 13
+  },
+  {
+    "_id": "607e89f21b856a4a589c69a8",
+    "name": "Dugges Cherry",
+    "price": 32,
+    "description": "Bärig, syrlig smak med tydlig karaktär av körsbär, inslag av mandelmassa och citrus.",
+    "image": "https://dugges.se/wp-content/uploads/2020/08/bottle_web2_Cherry-1000x1978.jpg",
+    "id": 14
   }
 ]

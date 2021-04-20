@@ -5,7 +5,7 @@ GET http://localhost:3000/api/product
 
 ###
 
-GET http://localhost:3000/api/product/4
+GET http://localhost:3000/api/product/607e8f1b7b7868220cd87d7e
 
 ###
 
@@ -13,20 +13,20 @@ POST http://localhost:3000/api/product
 Content-Type: application/json
 
 {
-    "name": "Dugges Tropic Thunder", 
-    "price": 43,
-    "description": "Mycket fruktig och syrlig smak med inslag av mango, passionsfrukt, persika och apelsin.",
-    "image": "https://dugges.se/wp-content/uploads/2015/07/bottle_web3_TropicThunder-2-1000x1978.jpg"
+    "name": "Dugges Amarillo",
+    "price": 25,
+    "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal.",
+    "image": "https://dugges.se/wp-content/uploads/2021/02/bottle_web3_Amarillo-1000x1978.jpg"
 }
 
 ###
 
 
-PUT http://localhost:3000/api/product/1
+PATCH http://localhost:3000/api/product/607e8f1b7b7868220cd87d7e
 Content-Type: application/json
 
 {
-    "name": "Dugges Amarillo", 
+    "name": "Dugges Test", 
     "price": 25,
     "description": "Humlearomatisk smak med tydlig beska, med inslag av ananas, tallbarr, honung, passionsfrukt och apelsinskal.", 
     "image": "https://dugges.se/wp-content/uploads/2021/02/bottle_web3_Amarillo-1000x1978.jpg"
@@ -35,4 +35,37 @@ Content-Type: application/json
 
 ### 
 
-DELETE http://localhost:3000/api/product/5
+DELETE http://localhost:3000/api/product/607e8eec7b7868220cd87d7d
+
+
+// User commands 
+
+### 
+POST http://localhost:3000/api/user/register
+Content-Type: application/json
+
+{
+    "userName": "Oliver", 
+    "passWord": "6krHRZ8P",
+    "role": "user"
+}
+
+
+
+###
+POST http://localhost:3000/api/user/login
+Content-Type: application/json
+
+{
+    "userName": "Browbeans", 
+    "passWord": "6krHRZ8P"
+}    
+
+
+### 
+
+GET http://localhost:3000/api/user/allUsers
+
+###
+
+DELETE http://localhost:3000/api/user/logout

@@ -22,7 +22,6 @@ async function createSearchBar(isError, message) {
   const searchSubmit = document.createElement('button')
   infoH2.innerHTML = 'Sök vänligen efter id som är en siffra 1 eller 2 osv...'
   searchSubmit.innerHTML = 'Sök'
-  searchInput.type = 'number'
   div.append(infoH2)
   if(isError === true) {
     const para = document.createElement('p')
@@ -36,6 +35,7 @@ async function createSearchBar(isError, message) {
 
   searchInput.addEventListener('change', () => {
     searchValue = searchInput.value
+    console.log(searchValue)
   })
   searchSubmit.addEventListener('click', () => {
     handleSearch(searchValue)
@@ -43,6 +43,7 @@ async function createSearchBar(isError, message) {
 }
 
 async function handleSearch(id) {
+  console.log(id)
   const change = await makeRequest(`/api/product/${id}`, "GET")
   if(change.name !== undefined) {
     showSpecificOrChanged(change, id)
@@ -129,7 +130,7 @@ function createInputsForChange(beerItem, btnText, isError) {
   if(btnText === 'Bekräfta') {
     submitButton.addEventListener(
       'click', 
-      () => requestChangeBeer(bodyTitle, description, price, image,beerItem.id)
+      () => requestChangeBeer(bodyTitle, description, price, image, beerItem._id)
     ) 
   } else {
     submitButton.addEventListener('click', 
@@ -149,7 +150,7 @@ async function requestChangeBeer(title, description, price, image, id) {
     description: description,
     image: image
 }
-  const change = await makeRequest("/api/product/" + id, "PUT", body)
+  const change = await makeRequest("/api/product/" + id, "PATCH", body)
   showSpecificOrChanged(body, id)
 }
 
@@ -170,7 +171,7 @@ async function showSpecificOrChanged(body, id) {
   h3.innerHTML = body.name;
   aboutPara.innerHTML = body.description;
   pricePara.innerHTML = body.price + ' kr';
-  idPara.innerHTML = 'ID: ' + body.id
+  idPara.innerHTML = 'ID: ' + body._id
   deleteButton.innerHTML = 'Ta bort bärsen'
   editButton.innerHTML = 'Ändra bärsen'
 
@@ -209,7 +210,6 @@ async function requestAddBeer(title, description, price, image) {
 
 async function requestSpecificBeer(id) {
   const specificBeer = await makeRequest("/api/product/" + id, "GET")
-  console.log(specificBeer)
   showSpecificOrChanged(specificBeer, id)
 }
 
@@ -249,10 +249,10 @@ async function showProduct() {
     buttonDiv.appendChild(editButton);
     buttonDiv.appendChild(deleteButton);
     buttonDiv.appendChild(specificButton);
-    specificButton.addEventListener('click', ()  => requestSpecificBeer(productItem.id))
+    specificButton.addEventListener('click', ()  => requestSpecificBeer(productItem._id))
     editButton.addEventListener('click', () => createInputsForChange(productItem, 'Bekräfta')) 
     deleteButton.onclick = async function removeProduct() {
-        fetch("/api/product/" + productItem.id, {
+        fetch("/api/product/" + productItem._id, {
           method: "DELETE",
         })
           .then((res) => res.json())

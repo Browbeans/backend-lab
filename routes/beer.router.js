@@ -1,80 +1,85 @@
-import express from 'express'
-import fs from 'fs'
+const { Router } = require('express')
+const express = require('express')
+const fs = require('fs')
+const mongoose = require('mongoose')
+const Product = require('../models/product.model')
 
-const router = express.Router()
+
+const beerRouter = express.Router()
+beerRouter.use(express.json())
 const data = fs.readFileSync('./beer.json')
 let beer = JSON.parse(data)
+mongoose.connect('mongodb://localhost:27017/excercise', { useNewUrlParser: true})
 
-router.post('/', (req, res) => {
+beerRouter.post('/', (req, res) => {
     if(!req.body.name || !req.body.price || !req.body.description || !req.body.image) {
         return res.status(400).json('Data missing')
     }
-    let idToSave = 0
-    beer.forEach((todo) => {
-        if(todo.id > idToSave) {
-            idToSave = todo.id
-        }
-    })
-    idToSave++
-    const newBeer = {
+
+    const product = new Product({
+        _id: new mongoose.Types.ObjectId(),
         name: req.body.name,
         price: req.body.price, 
         description: req.body.description, 
         image: req.body.image,
-        id: idToSave
-    }
-    beer.push(newBeer)
-    const data = JSON.stringify(beer, null, 2)
-    fs.writeFile("beer.json", data, (err) => {
-        if(err) throw err;
-        res.status(201).json(newBeer)
+    })
+    product
+    .save()
+    .then(result => {
+        res.status(201).json(result)
+    })
+    .catch(err => console.log(err))
+})
+
+beerRouter.get('/', (req, res) => {
+    Product.find()
+    .exec()
+    .then(result => {
+        res.status(200).json(result)
+    })
+    .catch(err => {
+        res.status(500).json(err)
     })
 })
 
-router.get('/', (req, res) => {
-    res.status(200).json(beer)
-})
-
-router.get('/:id', (req, res) => {
+beerRouter.get('/:id', (req, res) => {
     const urlID = req.params.id
-    const index = beer.findIndex(b => b.id === parseInt(urlID))
-    let specificBeer = beer[index]
-    if(specificBeer === undefined){
-        res.status(404).json(`There is no beer with ${urlID} as id`)
-    }
-    res.status(200).json(specificBeer)
-})
-
-router.delete('/:id', (req, res) => {
-    const urlID = req.params.id
-    beer = beer.filter((specificBeer) => specificBeer.id !== parseInt(urlID));
-    const data = JSON.stringify(beer, null, 2)
-    fs.writeFile("beer.json", data, (err) => {
-        if(err) throw err;
-        res.status(200).json(null)
+    Product.findById(urlID)
+    .exec()
+    .then(doc => {
+        console.log(doc)
+        res.status(200).json(doc)
+    })
+    .catch(err => {
+        res.status(404).json('Sorry')
     })
 })
 
-router.put('/:id', (req, res) => {
+beerRouter.delete('/:id', (req, res) => {
     const urlID = req.params.id
-    const index = beer.findIndex(b => b.id === parseInt(urlID))
-    console.log(req.body)
-    if(index !== -1) {
-        let specificBeer = beer[index]
-        specificBeer.name = req.body.name
-        specificBeer.price = req.body.price
-        specificBeer.description = req.body.description
-        specificBeer.image = req.body.image
-    }
-    const changedBeer = {
-        specificBeer: beer[index]
-    }
-    const data = JSON.stringify(beer, null, 2)
-    fs.writeFile("beer.json", data,(err) => {
-        if(index === -1) {
-            res.status(404).json(`Cant find ${urlID} as an id`)
-        }
-        res.status(200).json(changedBeer)
+    Product.remove({ _id: urlID })
+    .exec()
+    .then(result => {
+        res.status(200).json(result)
+    })
+    .catch(err => {
+        res.status(500).json(err)
     })
 })
-export default router;
+
+beerRouter.patch('/:id', (req, res) => {
+    const urlID = req.params.id
+
+    Product.findByIdAndUpdate(urlID,
+        { $set:req.body }, 
+        { new:true }
+    )
+    .exec()
+    .then(result => {
+        res.status(200).json(result)
+    })
+    .catch(err => {
+        res.status(500).json(err)
+    })
+})
+module.exports = beerRouter
