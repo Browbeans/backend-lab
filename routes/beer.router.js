@@ -9,7 +9,7 @@ const beerRouter = express.Router()
 beerRouter.use(express.json())
 const data = fs.readFileSync('./beer.json')
 let beer = JSON.parse(data)
-mongoose.connect('mongodb://localhost:27017/excercise', { useNewUrlParser: true})
+mongoose.connect('mongodb://localhost:27017/excercise', { useNewUrlParser: true, useUnifiedTopology: true})
 
 beerRouter.post('/', (req, res) => {
     if(!req.body.name || !req.body.price || !req.body.description || !req.body.image) {

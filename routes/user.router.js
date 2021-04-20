@@ -6,7 +6,7 @@ const User = require('../models/user.model')
 const { restart } = require('nodemon')
 
 const userRouter = express.Router()
-mongoose.connect('mongodb://localhost:27017/excercise', { useNewUrlParser: true})
+mongoose.connect('mongodb://localhost:27017/excercise', { useNewUrlParser: true, useUnifiedTopology: true})
 
 const session = userRouter.use(cookieSession({
     name: 'session', 

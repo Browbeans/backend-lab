@@ -76,11 +76,15 @@ DELETE http://localhost:3000/api/user/logout
 
 ###
 
+GET http://localhost:3000/api/posts/allPosts
+
+###
+
 POST http://localhost:3000/api/posts/addPost
 Content-Type: application/json
 
 {
-    "title": "First post", 
+    "title": "Second post", 
     "body": "this is a test and lets see what happens"
 }
 
@@ -93,3 +97,7 @@ Content-Type: application/json
     "title": "Changed title on post", 
     "body": "changed body on post"
 }
+
+### 
+
+DELETE http://localhost:3000/api/posts/deletePost/607ecce1f720a333c8fbd653

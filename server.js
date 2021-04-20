@@ -12,4 +12,4 @@ app.use('/api/user', userRouter)
 app.use('/api/posts', postRouter)
 app.use(express.static('./public'))
 
-app.listen(port, () => console.log('server is running on http://localhost:3000'))
+app.listen(port)
