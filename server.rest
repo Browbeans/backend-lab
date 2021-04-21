@@ -84,8 +84,8 @@ POST http://localhost:3000/api/posts/addPost
 Content-Type: application/json
 
 {
-    "title": "Second post", 
-    "body": "this is a test and lets see what happens"
+    "title": "Borttagning av post", 
+    "body": "ska ta bort från admin"
 }
 
 ###
@@ -100,4 +100,4 @@ Content-Type: application/json
 
 ### 
 
-DELETE http://localhost:3000/api/posts/deletePost/607ecce1f720a333c8fbd653
+DELETE http://localhost:3000/api/posts/deletePost/607fc9f735bba3431c49f65a

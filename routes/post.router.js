@@ -10,8 +10,8 @@ const postRouter = express.Router()
 
 mongoose.connect('mongodb://localhost:27017/excercise', { useNewUrlParser: true, useUnifiedTopology: true })
 postRouter.use(express.json())
-
 postRouter.use(session)
+
 postRouter.get('/', async (req, res) => {
     const result = await Posts.find()
     res.status(200).status(result)
@@ -42,8 +42,8 @@ postRouter.post('/addPost', async (req, res) => {
 
 postRouter.patch('/editPost/:id', async (req, res) => {
     const urlID = req.params.id
+    if(currentPost.author !== req.session.username && req.session.role !== 'admin') {
     const currentPost = await Posts.findById(urlID)
-    if(currentPost.author !== req.session.username) {
         return res.status(401).json('You didnt create post therefor u cant change it')
     }
 
@@ -59,7 +59,7 @@ postRouter.patch('/editPost/:id', async (req, res) => {
 postRouter.delete('/deletePost/:id', async (req, res) => {
     const urlID = req.params.id
     const currentPost = await Posts.findById(urlID)
-    if(currentPost.author !== req.session.username) {
+    if(currentPost.author !== req.session.username && req.session.role !== 'admin') {
         return res.status(401).json('Yoo didnt create this post therefor you cant delete it')
     }
     const deleted = await Posts.findByIdAndDelete({_id: urlID})
